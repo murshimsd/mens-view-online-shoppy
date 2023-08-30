@@ -1,0 +1,72 @@
+{% extends 'seller/master.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid px-4">
+  <div class="row g-3 my-2">
+    <div class="col-md-3">
+      <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+        <div>
+          <h3 class="fs-2">{{ products_count }}</h3>
+          <p class="fs-5">Products</p>
+        </div>
+        <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+        <div>
+          <h3 class="fs-2">{{order_count}}</h3>
+          <p class="fs-5">Orders</p>
+        </div>
+        <i class="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+        <div>
+          <h3 class="fs-2">{{delivered_count}}</h3>
+          <p class="fs-5">Delivered</p>
+        </div>
+        <i class="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+        <div>
+          <h3 class="fs-2">%{{percentage | stringformat:'d'}}</h3>
+          <p class="fs-5">Increase</p>
+        </div>
+        <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+      </div>
+    </div>
+  </div>
+  <div class="row my-5">
+    <h3 class="fs-4 mb-3">Recent Orders</h3>
+    <div class="col">
+      <table class="table bg-white rounded shadow-sm  table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Price</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in order %}
+          <tr>
+            <td>{{order.product.product_name | title}}</td>
+            <td>{{order.order.customer.customer_name | title}}</td>
+            <td>RS:{{order.price| stringformat:'d'}}</td>
+            <td>{{order.item_status | title}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

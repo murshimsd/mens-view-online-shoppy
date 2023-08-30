@@ -1,0 +1,56 @@
+{% extends 'mensviewadmin/master.html' %}
+{% load static %}
+{% block content %}
+<div class="row my-5">
+  <div class="col">
+    {% if seller_list %}
+    <div class="table-responsive">
+      <table class="table rounded shadow-sm  table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col">Seller Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Account Holder Name</th>
+            <th scope="col">IFSC</th>
+            <th scope="col">Branch</th>
+            <th scope="col">Account Number</th>
+            <th scope="col">Action</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          {% for seller in seller_list %}
+          <tr>
+            <td>{{seller.seller_name|upper}}</td>
+            <td>{{seller.seller_email}}</td>
+            <td>{{seller.address}}</td>
+            <td>{{seller.phone_number}}</td>
+            <td>{{seller.gender}}</td>
+            <td>{{seller.comp_name}}</td>
+            <td>{{seller.accholder_name}}</td>
+            <td>{{seller.ifsc}}</td>
+            <td>{{seller.branch}}</td>
+            <td>{{seller.acc_number}}</td>
+            <td>
+              <button type="button" class="btn btn-danger">
+                <a href="{% url 'mensviewadmin:deletesell' seller.id %}"
+                  style="color: aliceblue;text-decoration: none;">REMOVE</a>
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+          {% else %}
+          <div class="cart1 text-center fw-lighter mt-5 mb-5">
+            <h2>Sellers Empty</h2>
+          </div>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

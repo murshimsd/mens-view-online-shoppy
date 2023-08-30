@@ -1,0 +1,37 @@
+{% extends 'customer/master.html' %}
+{% load static %}
+{% block content %}
+  <section id="hero">
+    <h2>Super value deals</h2>
+    <h1>On all products</h1>
+    <p>save more</p>
+    <button class="btn btn-dark"><a class="nav-link" href="{% url 'customer:allview' %}">ShopNow</a></button>
+  </section>
+  <div class="col-sm-12">
+    <h1 class="text-center">Trending</h1>
+    <div class="row owl-carousel owl-theme m-auto">
+      {% for product in prods %}
+      <div class="item mt-3 me-2 ">
+        <div class="card shadow border mt-3">
+          <div class="product align-items-center p-2 text-center">
+            <img src="{{product.product_image.url}}" alt="" class="rounded" width="160" height="140">
+            <h5>{{product.product_name|title}}</h5>
+          </div>
+          <div class="cost mt-3 text-dark text-center">
+            <span>RS {{product.price| stringformat:'d'}}</span>
+          </div>
+          <a class="p-3 sheo nav-link text-center text-white mt-3 cursor" 
+          href="{% url 'customer:detailspage' product.id %}">
+            BuyNow
+          </a> 
+
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+  </div>
+  </div>
+  {% endblock %}

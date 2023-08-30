@@ -1,0 +1,114 @@
+{% extends 'mensviewadmin/master.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+      {% block content %}
+      <div class="container-fluid px-4">
+        <div class="row g-3 my-2">
+          <div class="col-md-3">
+            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+              <div>
+                <h3 class="fs-2">{{prod_count}}</h3>
+                <p class="fs-5">Products</p>
+              </div>
+              <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+              <div>
+                <h3 class="fs-2">{{sellers_count}}</h3>
+                <p class="fs-5">Sellers</p>
+              </div>
+              <i class="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+              <div>
+                <h3 class="fs-2">{{cust_count}}</h3>
+                <p class="fs-5">customers</p>
+              </div>
+              <i class="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+              <div>
+                <h3 class="fs-2">%{{percentage| stringformat:'d'}}</h3>
+                <p class="fs-5">profit</p>
+              </div>
+              <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="row my-5">
+          <div class="col-lg" style="height: 300px;">
+            <h3 class="fs-4 mb-3">Recent Approvels</h3>
+            <table class="table bg-white rounded shadow-sm  table-hover text-center">
+              <thead>
+                <tr>
+                  <th scope="col">Seller Name</th>
+                  <th scope="col">Company Name</th>
+                  <th scope="col">Image</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for seller in seller_list %}
+                <tr>
+                  <td>{{seller.seller_name|upper}}</td>
+                  <td>{{seller.comp_name}}</td>
+                  <td>
+                    <img src=" {{seller.sell_pic.url}}" style="height: 30px; width: 30px;" class="rounded" alt="...">
+
+                  </td>
+                </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+          </div>
+          <div class="col-lg">
+            <h3 class="fs-4 mb-3">Recent customers</h3>
+            <table class="table bg-white rounded shadow-sm  table-hover text-center">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Number</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for customer in last_five_cust %}
+                <tr>
+                  <td>{{customer.customer_name|upper}}</td>
+                  <td>{{customer.email_address}}</td>
+                  <td>{{customer.phone_number}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+  {% endblock %}
+</body>
+
+</html>

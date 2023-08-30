@@ -1,0 +1,50 @@
+{% extends 'customer/master.html' %}
+{% load static %}
+{% block content %}
+<div class="wrapper">
+  {% if cart_list %}
+  <h1>cart</h1>
+  <div class="project">
+    <div class="shop scroll" style="height: 500px; overflow: auto; overflow-x: hidden;">
+      {% for cart in cart_list %}
+      <div class="box shadow prod_data">
+        <img src="{{cart.product.product_image.url}}" alt="">
+        <div class="content">   
+          <h3>{{cart.product.product_name}}
+            <p>Size:{{cart.product_size}}</p>
+            <input type="hidden" class="prod_id" value="{{cart.product.id}}">
+          {% csrf_token %}
+          <p class="unit">quantity: <input type="number" class="qty changeqty" data-item="{{cart.product.id}}" id="quantity" value="{{cart.product_quantity}}" data-product-id="{{cart.product.id}}"   min="1" max="{{cart.product.current_stock}}"></p>
+          <p class="amt" hidden id="amt{{cart.product.id}}">{{cart.total}}</p>
+          </h3>
+          <h5>Rs:{{cart.product.price| stringformat:'d'}}</h5>
+          <p class="btn-area">
+            <span class="btn4"><a href="{% url 'customer:remove_cart' cart.product.id %}">
+            <i class="fa fa-trash"></i>
+            </a></span>
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+      {% comment %} <a class='check' href="{% url 'customer:checkout'%}"><i class="fa fa-shopping-cart"></i>Checkout</a> {% endcomment %}
+    </div>
+        <div class="right-bar shadow">
+        <p><span>Total</span> <span id="Total">RS:{{total_price}}</span></p>
+        <hr>
+        <p><span>Delivery Charge</span> <span>50</span></p>
+        <br><br><br>
+        <p><span>Grand Total</span><span  id="Grandtotal"></span></p>
+        {% comment %} <button type="submit" class="but"><i class="fa fa-shopping-cart"></i> Checkout</button> {% endcomment %}
+        <a class='check' href="{% url 'customer:checkout'%}"><i class="fa fa-shopping-cart"></i>Checkout</a>
+       </div>
+  </div>
+  {% else %}
+  <div class="cart1 text-center fw-lighter mt-5 mb-5">
+    <img src="{% static 'img/cart.png' %}" alt="">
+  </div>
+  {% endif %}
+</div>
+<br>
+<br>
+<br>
+{% endblock %}

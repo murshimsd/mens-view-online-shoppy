@@ -1,0 +1,48 @@
+{% extends 'customer/master.html' %}
+{% load static %}
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="list-group">
+                <a href="{% url 'customer:category' %}" class="list-group-item list-group-item-action" aria-current="true">All Products</a>
+                <a href="{% url 'customer:categorywise' 'Shirt' %}" class="list-group-item list-group-item-action">Shirt</a>
+                <a href="{% url 'customer:categorywise' 'T-shirt' %}" class="list-group-item list-group-item-action">T-shirt</a>
+                <a href="{% url 'customer:categorywise' 'Pant' %}" class="list-group-item list-group-item-action">Pants</a>
+                <a href="{% url 'customer:categorywise' 'Shoes' %}" class="list-group-item list-group-item-action">Shoes</a>
+                <a href="{% url 'customer:categorywise' 'Accessories' %}" class="list-group-item list-group-item-action">Accessorires</a>
+                <a href="{% url 'customer:categorywise' 'Casuals' %}" class="list-group-item list-group-item-action">Casuals</a>
+                <a href="{% url 'customer:categorywise' 'Innerwears' %}" class="list-group-item list-group-item-action">Innerwears</a>
+            </div>
+        </div>
+        <div class="col-sm-8 offset-sm-1 scroll" style="height: 600px; overflow: auto; overflow-x: hidden;">
+            <div class="row m-auto">
+                {% for product in prods %}
+                <div class="col-md-4 mt-3 ">
+                    <div class="card shadow border mt-3">
+                        <div class="product align-items-center p-2 text-center">
+                            <img src="{{product.product_image.url}}" alt="" class="rounded" width="160" height="140">
+                            <h5>{{product.product_name|title}}</h5>
+                        </div>
+                        <div class="mt-3 info text-center">
+                            <span class="text d-block">{{product.product_description}}</span>
+                        </div>
+                        <div class="seller mt-3">
+                            <h6>Seller:{{product.seller.seller_name|title}}</h6>
+                        </div>
+                        <div class="cost mt-3 text-dark text-center">
+                            <span>RS {{product.price| stringformat:'d'}}</span>
+                        </div>
+                        <a class="p-3 sheo nav-link text-center text-white mt-3 cursor" 
+          href="{% url 'customer:detailspage' product.id %}">
+            BuyNow
+          </a> 
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

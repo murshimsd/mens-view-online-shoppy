@@ -1,0 +1,34 @@
+{% extends 'seller/master.html' %}
+{% load static %}
+{% block content %}
+<div class="row my-5 me-1">
+    <h3 class="fs-1 mb-3 text-center">Orders</h3>
+    <div class="col">
+
+      <table class="table bg-white rounded shadow-sm  table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Price</th>
+            <th scope="col">Payment</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+          <tr>
+            <td>{{order.product.product_name}}</td>
+            <td>{{order.order.customer.customer_name}}</td>
+            <td>RS:{{order.price| stringformat:'d'}}</td>
+            <td>{{order.order.payment_mode}}</td>
+            <td>{{order.item_status}}</td>
+            <td><a href='{% url 'seller:orderdetails' order.order.id %}' class="btn btn-primary">View</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'customer/master.html' %}
+{% load static %}
+{% block content %}
+<div class="col-sm-12">
+    <div class="row">
+        <div class="col-sm-7 m-auto mt-5">
+            <div class="card shadow border">
+                <div class="card-body w-100">
+                    <div class="text-center">
+                    <h3>UPDATE PROFILE</h3>
+                    </div>
+                    <p style="color: green;"><b>{{msg}}</b></p>
+                    <form method="POST">
+                        {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Name</label>
+                        <input type="text" name="c_name" class="form-control" id="exampleFormControlInput1" value="{{custs.customer_name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                        <input type="email" name="c_email" class="form-control" id="email" value="{{custs.email_address}}">
+                        <span id="email_error"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Adress</label>
+                        <textarea class="form-control" name="c_address" id="exampleFormControlTextarea1" rows="3"> {{custs.address}}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Phonenumber</label>
+                        <input type="number" name="c_number" class="form-control" id="exampleFormControlInput1" value="{{custs.phone_number}}">
+                    </div>
+                        <button type="submit" class="btn2 mt-3">Update</button>
+                    </form>
+                </div>        
+            </div>
+       
+        </div>
+    </div>
+</div>
+{% endblock %}

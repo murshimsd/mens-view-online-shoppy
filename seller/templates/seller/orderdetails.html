@@ -1,0 +1,61 @@
+{% extends 'seller/master.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <h1>View Order</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Order Items</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Size</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <img src="{{order.product.product_image.url}}" alt="" class="rounded" width="50px"
+                                height="50px">
+                            {{ order.product.product_name }}
+                        </td>
+                        <td>RS:{{ order.price | stringformat:'d'}}</td>
+                        <td>{{ order.quantity }}</td>
+                        <td>{{ order.prod_size }}</td>
+                        <td>{{ order.item_status }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Shipping Details</h4>
+            <p><strong>Name:</strong> {{ order.order.first_name | title }} {{ order.order.last_name  | title  }}</p>
+            <p><strong>Address:</strong> {{ order.order.address  | title }}</p>
+            <p><strong>City:</strong> {{ order.order.city  | title }}</p>
+            <p><strong>State:</strong> {{ order.order.state  | title }}</p>
+            <p><strong>Country:</strong> {{ order.order.country | title  }}</p>
+            <p><strong>Pincode:</strong> {{ order.order.pincode | title  }}</p>
+            <p><strong>Phone Number:</strong> {{ order.order.ph_number  | title }}</p>
+        </div>
+        <div class="col-md-6">
+            <h4>Order Details</h4>
+            <p><strong>Tracking Number:</strong> {{ order.order.tracking_no  | title }}</p>
+            <p><strong>Order Date:</strong> {{ order.order.created_at |date}}</p>
+            <p><strong>Payment Mode:</strong> {{ order.order.payment_mode }}</p>
+            <p><strong>Status:</strong> {{ order.item_status  | title  }}</p>
+            <p><strong>Total Price:</strong> {{ order.order.total_price | stringformat:'d'}}</p>
+            <a href="{% url 'seller:delivered' data.id order.order.id %}" class="btn btn-success">Delivered</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

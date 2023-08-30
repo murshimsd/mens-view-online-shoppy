@@ -1,0 +1,68 @@
+{% extends 'seller/master.html' %}
+{% load static %}
+{% block content %}
+<div class="row my-5 me-1">
+    <div class="col-12 col-sm-8 col-md-6 m-auto">
+        <div class="card shadow border">
+            <div class="card-body w-100">
+                <form method='POST' enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    <div class="pimg mb-3 text-center ">
+                        <img src="{{data.sell_pic.url}}" class="rounded-circle"  alt="img">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Name</label>
+                        <input type="name" name='s_name' class="form-control" id="exampleFormControlInput1"
+                            value="{{data.seller_name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                        <input type="email" name="s_email" class="form-control" id="exampleFormControlInput1"
+                        value="{{data.seller_email}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Adress</label>
+                        <textarea class="form-control" name="s_address" id="exampleFormControlTextarea1"
+                            rows="3">{{data.address}}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Phonenumber</label>
+                        <input type="number" name="s_phone" class="form-control" id="exampleFormControlInput1"
+                        value="{{data.phone_number}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Company Name</label>
+                        <input type="name" name="comp_name" class="form-control" id="exampleFormControlInput1"
+                        value="{{data.comp_name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Account Holder Name</label>
+                        <input type="name" name="accholder_name" class="form-control" id="exampleFormControlInput1"
+                        value="{{data.accholder_name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">IFSC</label>
+                        <input type="name" name="s_ifsc" class="form-control" id="exampleFormControlInput1"
+                        value="{{data.ifsc}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Branch</label>
+                        <input type="name" name="s_branch" class="form-control" id="exampleFormControlInput1"
+                        value="{{data.branch}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Account Number</label>
+                        <input type="number" name="accnum" class="form-control" id="exampleFormControlInput1"
+                        value="{{data.acc_number}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Seller Image</label>
+                        <input class="form-control" value="{{data.sell_pic.url}}" name="s_image" type="file" id="formFile">
+                    </div>
+                    <button type="submit" class="btn2">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

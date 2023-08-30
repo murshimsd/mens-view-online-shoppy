@@ -1,0 +1,240 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'spartan',sans-serif;
+}
+h1{
+    font-size: 50px;
+    line-height: 64px;
+    color: #222;
+}
+h2{
+    font-size: 46px;
+    line-height: 54px;
+    color: #222;
+}
+h4{
+    font-size: 20px;
+    color: #222;
+}
+h6{
+    font-weight: 700;
+    font-size: 12px;
+}
+p{
+    font-size: 16px;
+    color: #465b52;
+    margin: 15px 0 20px 0;
+}
+.select-p1{
+    padding: 40px 80px;
+}
+.select-m1{
+    margin: 40px 0;
+}
+body{
+    width: 100%;
+}
+
+#header{
+    justify-content: space-between;
+    background: #E3E6F3;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+    z-index: 999;
+    position: sticky;
+    top: 0;
+    left: 0;
+
+}
+#navbar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #E3E6F3;
+}
+.searchbox{
+  border: none;
+  border-radius: 50px;
+}
+#navbar li{
+  list-style: none;
+  padding: 0 20px;
+}
+#navbar li a{
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  transition: 0.3s ease;
+}
+#navbar li a:hover{
+  color: #088178;
+}
+
+#hero{
+  background-image: url("{% static 'img/menshero.jpg' %}");
+  height: 90vh;
+  width: 100%;
+  background-size: cover;
+  background-position: top 25% right 0;
+  padding: 0 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+#hero h1{
+  color: #088178;
+} 
+#feature .fe-box img{
+  width: 100px;
+  margin-left: auto;
+}
+#feature .fe-box{
+  width: 136px;
+  padding: 25px 15px;
+  box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+  border: 1px solid #cce7d0;
+  border-radius: 4px;
+  margin: 15px 0 ;
+}
+#feature{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; 
+}
+footer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: #E3E6F3;
+  
+}
+footer .col{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+footer .logo{
+  margin-bottom: 30px;
+}
+footer h4{
+  font-size: 14px;
+  padding-bottom: 20px;
+}
+footer p{
+  font-size: 13px;
+  margin: 0 0 8px 0;
+}
+footer a{
+  font-size: 13px;
+  text-decoration: none;
+  color: #222;
+  margin-bottom: 10px;
+}
+footer .follow{
+  margin-top: 20px;
+}
+footer .follow i{
+  color: #465b52;
+  cursor: pointer;
+}
+footer .follow i:hover,
+footer a:hover{
+  color: #088178;
+}
+footer .copyright{
+  width: 100%;
+  text-align: center;
+
+}
+
+
+.cont{
+    margin-top: 100px;
+}
+.col-md-5 h2{
+    color: #555;
+}
+.price{
+    color:#088178;
+    font-size: 26px;
+    font-weight: bold;
+    padding-top: 20px;
+}
+.cart{
+    background-color:#088178;
+    color: #ffffff;
+    font-size: 15px;  
+}
+.alert{
+    color: red;
+    font-weight: bold;
+}
+
+.btn2{
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: #088178;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.cart1{
+    color: #555;
+    font-weight: lighter;
+}
+.card{
+  width: 100%;
+  background-color: white;
+  border-radius: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  transition: all .6s ease;
+}
+.card:hover{
+  transform: scale(1.02);
+}
+.text{
+  font-size: 13px;
+  color: #cbcbcb;
+}
+.info{
+  line-height: 17px;
+}
+.cost span{
+  color: #088178;
+  font-weight: bold;
+  font-size: 20px;
+}
+.sheo{
+  width: 100%;
+  background-color:  #088178;
+  border-bottom-left-radius: 17px;
+  border-bottom-right-radius: 17px;
+
+} 
+.sheo a{
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.side{
+  background-color:  #088178;
+  
+}
+#hero {
+  background-image: url('img/menshero.jpg');
+}
+
+
+

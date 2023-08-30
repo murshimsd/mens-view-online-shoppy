@@ -1,0 +1,43 @@
+{% extends 'mensviewadmin/master.html' %}
+{% load static %}
+{% block content %}
+<div class="row my-5">
+  <div class="col">
+    {% if customer_list %}
+    <div class="table-responsive">
+      <table class="table rounded shadow-sm  table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for customer in customer_list %}
+          <tr>
+            <td>{{customer.customer_name|upper}}</td>
+            <td>{{customer.email_address}}</td>
+            <td>{{customer.address}}</td>
+            <td>{{customer.phone_number}}</td>
+            <td>{{customer.gender}}</td>
+            <td><button class="btn btn-danger">
+                <a href="{% url 'mensviewadmin:deletecust' customer.id %}"
+                  style="color: aliceblue;text-decoration: none;">REMOVE</a>
+              </button></td>
+          </tr>
+          {% endfor %}
+          {% else %}
+          <div class="cart1 text-center fw-lighter mt-5 mb-5">
+            <h2>No Customers</h2>
+          </div>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

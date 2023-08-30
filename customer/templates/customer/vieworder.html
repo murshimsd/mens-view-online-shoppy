@@ -1,0 +1,61 @@
+{% extends 'customer/master.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <h1>View Order</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Order Items</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Size</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in orderitems %}
+                    <tr>
+                        <td>
+                            <img src="{{item.product.product_image.url}}" alt="" class="rounded" width="50px"
+                                height="50px">
+                            {{ item.product.product_name }}
+                        </td>
+                        <td>{{ item.prod_size }}</td>
+                        <td>RS:{{ item.price | stringformat:'d'}}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.item_status | title }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Shipping Details</h4>
+            <p><strong>Name:</strong> {{ order.first_name }} {{ order.last_name }}</p>
+            <p><strong>Address:</strong> {{ order.address }}</p>
+            <p><strong>City:</strong> {{ order.city }}</p>
+            <p><strong>State:</strong> {{ order.state }}</p>
+            <p><strong>Country:</strong> {{ order.country }}</p>
+            <p><strong>Pincode:</strong> {{ order.pincode }}</p>
+            <p><strong>Phone Number:</strong> {{ order.ph_number }}</p>
+        </div>
+        <div class="col-md-6">
+            <h4>Order Details</h4>
+            <p><strong>Tracking Number:</strong> {{ order.tracking_no }}</p>
+            <p><strong>Order Date:</strong> {{ order.created_at |date}}</p>
+            <p><strong>Payment Mode:</strong> {{ order.payment_mode }}</p>
+            <p><strong>Total Price:</strong> {{ order.total_price | stringformat:'d'}}</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

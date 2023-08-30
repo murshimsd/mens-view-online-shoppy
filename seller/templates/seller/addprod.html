@@ -1,0 +1,106 @@
+{% extends 'seller/master.html' %}
+{% load static %}
+{% block content %}
+<div class="row my-5 me-1">
+    <h3 class="fs-1 mb-3 text-center">ADD PRODUCT</h3>
+    <div class="col">
+        <div class="row">
+            <div class="col-sm-8 m-auto">
+                <div class="card shadow border">
+                    <div class="card-body w-100">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{msg}}
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Product Name</label>
+                                <input type="name" required name='p_name' class="form-control" id="prodname">
+                                <span id="product_error"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Product Category</label>
+                                <select class="form-select" required name="p_cat" aria-label="Default select example">
+                                    <option selected>Select product category</option>
+                                    <option value="Shirt">Shirt</option>
+                                    <option value="T-shirt">T-shirt</option>
+                                    <option value="Pant">Pant</option>
+                                    <option value="Shoes">Shoes</option>
+                                    <option value="Casuals">Casuals</option>
+                                    <option value="Accessories">Accessories</option>
+                                    <option value="Innerwears">Innerwears</option>
+                                  </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Product Describtion</label>
+                                <textarea class="form-control" required name='p_description' id="exampleFormControlTextarea1"
+                                    rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Product Number</label>
+                                <input type="number" name='p_number' required class="form-control" id="exampleFormControlInput1">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Current Stock</label>
+                                <input type="number" required name='current_stock' class="form-control"
+                                    id="exampleFormControlInput1">
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Product Image</label>
+                                <input class="form-control" required name='p_image' type="file" id="formFile">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Price</label>
+                                <input type="number" required name='price' class="form-control" id="exampleFormControlInput1">
+                            </div>
+                            {% if messages %}
+                            {% for message in messages %}
+                            <p style="color: red;" class="alert alert-{{ message.tags }}">{{ message }}</p>
+                            {% endfor %}
+                            {% endif %}
+                            <button type="submit" class="btn2">Add Product</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#prodname').change(function () {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRFToken": $('[name=csrfmiddlewaretoken]').val()
+            }
+        })
+
+        $.ajax({
+
+            url: '{% url "seller:product_exist" %}',
+            type: 'POST',
+
+            data: {
+                product: $(this).val()
+            },
+            success: function (response) {
+                var product_error = $('#product_error')
+                var prodname = $('#prodname')
+
+
+                if (response.status == true) {
+                    $('#product_error').html('Product already exist').css('color', 'red')
+                    $('#prodname').css('border', '2px solid red')
+                }
+                else {
+                    $('#product_error').html('Success').css('color', 'green')
+                    $('#prodname').css('border', '2px solid green')
+
+
+                }
+
+                console.log(response.status)
+            }
+
+        })
+
+    })
+</script>
+{% endblock %}

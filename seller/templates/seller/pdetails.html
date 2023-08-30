@@ -1,0 +1,47 @@
+{% extends 'seller/master.html' %}
+{% load static %}
+{% block content %}
+
+<div class="cont col-sm-10">
+    <div class="row">
+        <div class="col md-5">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="{{details.product_image.url}}" class="d-block w-100" style="height: 400px;" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{details.product_image.url}}" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{details.product_image.url}}" class="d-block w-100" alt="...">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </div>
+        <div class="col-md-5">
+            <h2>{{details.product_name}}</h2>
+            <p>Product Number:{{details.product_number}}</p>
+            <p>{{details.product_description}}</p>
+            <p class="price">RS {{details.price| stringformat:'d'}}</p>
+            <p><b>Current Stock:{{details.current_stock}}</b></p>
+            <button class="btn btn-danger">
+              <a href="{% url 'seller:deleteprod' details.id %}"
+                style="color: aliceblue;text-decoration: none;">REMOVE</a>
+            </button>
+            <p class="alert"></p>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}

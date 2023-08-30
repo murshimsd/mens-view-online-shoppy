@@ -1,0 +1,34 @@
+{% extends 'customer/master.html' %}
+{% load static %}
+{% block content %}
+<div class="wrapper">
+  {% if wish_list %}
+  <h1>My wishlist</h1>
+  <div class="project">
+    <div class="shop scroll" style="height: 470px; overflow: auto; overflow-x: hidden;">
+      {% for wish in wish_list %}
+      <div class="box shadow">
+        <img src="{{wish.product.product_image.url}}" alt="">
+        <div class="content">
+          <h3>{{wish.product.product_name}}
+          </h3>
+          <h5>Seller:{{wish.product.seller.seller_name}}</h5>
+          <h4>Rs:{{wish.product.price| stringformat:'d'}}</h4>
+          <p class="btn-area1">
+            <span class="btn2"><a class="nav-link" href="{% url 'customer:remove_wish' wish.product.id %}"><i class="fa fa-trash"></i></a></span>
+          </p>
+          <p class="btn-area2">
+            <span class="btn3"><a class="nav-link" href="{% url 'customer:detailspage' wish.product.id %}"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></span>
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% else %}
+  <div class="cart1 text-center fw-lighter mt-5 mb-5">
+    <img src="{% static 'img/wish.png' %}" height="550px" alt="">
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

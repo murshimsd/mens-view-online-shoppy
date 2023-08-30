@@ -1,0 +1,85 @@
+{% extends 'customer/master.html' %}
+{% load static %}
+{% block content %}
+
+<div class="cont col-sm-10">
+  <div class="row">
+    <div class="col md-5">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{details.product_image.url}}" class="d-block w-100" style="height: 400px;" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{details.product_image.url}}" class="d-block w-100" style="height: 400px;" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{details.product_image.url}}" class="d-block w-100" style="height: 400px;" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-5 prod_data">
+      <form method="POST">
+        {% csrf_token %}
+        {% if details.trend %}
+        <span class="float-end"><img src="{% static 'img/trend.png' %}" width="70px" alt=""></span>
+        {% endif %}
+        <h2>{{details.product_name}}</h2>
+        <p>Product Number:{{details.product_number}}</p>
+        <p>{{details.product_description}}</p>
+        <p class="price">RS {{details.price| stringformat:'d'}}</p>
+        <p><b>Current Stock:{{details.current_stock}}</b></p>
+        <input type="hidden" value="{{details.id}}" class="prod_id">
+        <p><b>Size</b></p>
+        <p><select class="form-select" name="p_size" aria-label="Default select example">
+            <option selected value="S">Small</option>
+            <option value="M">Medium</option>
+            <option value="L">Large</option>
+            <option value="XL">Extra Large</option>
+            <option value="XXL">XXL</option>
+          </select></p>
+        <p>Seller:{{details.seller.seller_name}}</p>
+        {% if details.current_stock > 0 %}
+        <button type="submit" class="btn btn-success cart">Add to cart</button>
+        {% else %}
+        <span><img src="{% static 'img/outofstock.png' %}" width="170px" alt=""></span>
+        {%endif%}
+        {% if details.id in request.session.wishlist %}
+        <span class="addtowishlist">
+          <i class="fa fa-2xl fa-heart ms-2" aria-hidden="true" style="color: red;"></i>
+        </span>
+        {% else %}
+        <span class="addtowishlist">
+          <i class="fa fa-2xl fa-heart ms-2" aria-hidden="true"></i>
+        </span>
+        {% endif %}
+        
+        <!-- {% if product_exist %}
+        <a href="">
+          <i class="fa fa-2xl fa-heart ms-2" aria-hidden="true" style="color: red;"></i>
+        </a>
+        {% else %}
+        <a href="">
+          <i class="fa fa-2xl fa-heart ms-2" aria-hidden="true"></i>
+        </a>
+        {% endif %} -->
+        {% if message %}
+        <p>{{message}}</p>
+        {% endif %}
+        <p class="alert" id="alert">{{msg}}</p>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'mensviewadmin/master.html' %}
+{% load static %}
+{% block content %}
+<div class="row my-5">
+  <div class="col">
+    {% if prods %}
+    <div class="table-responsive">
+      <table class="table rounded shadow-sm  table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">Seller</th>
+            <th scope="col">product Number</th>
+            <th scope="col">Image</th>
+            <th scope="col">Price</th>
+            <th scope="col">Trending</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in prods %}
+          <tr>
+            <td>{{product.product_name|title}}</td>
+            <td>{{product.seller.seller_name}}</td>
+            <td>{{product.product_number}}</td>
+            <td>
+              <img src=" {{product.product_image.url}}" style="height: 50px; width: 50px;" class="rounded" alt="...">
+            </td>
+            <td>{{product.price| stringformat:'d'}}</td>
+            <td>
+              {% if not product.trend %}
+              <button class="btn btn-success">
+                <a href="{% url 'mensviewadmin:trend' product.id %}"
+                  style="color: aliceblue;text-decoration: none;">TREND</a>
+              </button>
+              {% else %}
+              <button class="btn btn-danger">
+                <a href="{% url 'mensviewadmin:untrend' product.id %}"
+                  style="color: aliceblue;text-decoration: none;">UNTREND</a>
+              </button>
+              {% endif %}
+            </td>
+            <td><button class="btn btn-danger">
+              <a href="{% url 'mensviewadmin:deleteprod' product.id %}"
+                style="color: aliceblue;text-decoration: none;">REMOVE</a>
+            </button>
+          </td>
+          
+          </tr>
+          {% endfor %}
+          {% else %}
+          <div class="cart1 text-center fw-lighter mt-5 mb-5">
+            <h2>No Products</h2>
+          </div>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'seller/master.html' %}
+{% load static %}
+{% block content %}
+<div class="row my-5 me-1">
+    <h3 class="fs-1 mb-3 text-center">UPDATE PRODUCT</h3>
+    <div class="col">
+        <div class="row">
+            <div class="col-sm-8 m-auto">
+                <div class="card shadow border">
+                    <div class="card-body w-100">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="text" id="p_id" hidden name="productid">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Product Name</label>
+                                <select id="productno" class="form-select" aria-label="Default select example">
+                                    <option selected>select a product to update</option>
+                                    {% for product in prod_data %}
+                                    <option value="{{product.id}}">{{product.product_name}}</option>
+                                    {% endfor %}
+
+
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Current Stock</label>
+                                <input type="name" readonly class="form-control" id="c_stock">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Update Stock</label>
+                                <input type="name" name='new_stock'value='0' class="form-control" id="n_stock">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Current Price</label>
+                                <input type="name" name='new_price' class="form-control" id="c_price">
+                            </div>
+                            <button type="submit" class="btn2">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#productno').change(function () {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRFToken": $('[name=csrfmiddlewaretoken]').val()
+            }
+        })
+
+        $.ajax({
+            url: '{% url "seller:getstock" %}',
+            type: 'POST',
+            data: {
+                id: $(this).val()
+            },
+            success: function (response) {
+                $('#c_stock').val(response.stock)
+                $('#p_id').val(response.p_id)
+                $('#c_price').val(response.price)
+
+            }
+        })
+
+    })
+
+</script>
+{% endblock %}

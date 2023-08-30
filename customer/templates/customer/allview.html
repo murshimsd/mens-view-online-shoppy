@@ -1,0 +1,36 @@
+{% extends 'customer/master.html' %}
+{% load static %}
+{% block content %}
+<div class="col-sm-12">
+  <h1 class="text-center">All Products</h1>
+  <div class="row m-auto">
+    {% for product in prods %}
+    <div class="col-md-3 mt-3 ">
+      <div class="card shadow border mt-3">
+        <div class="product align-items-center p-2 text-center">
+          <img src="{{product.product_image.url}}" alt="" class="rounded" width="160" height="140">
+          <h5>{{product.product_name|title}}</h5>
+        </div>
+        <div class="mt-3 info text-center">
+          <span class="text d-block">{{product.product_description}}</span>
+        </div>
+        <div class="seller mt-3">
+          <h6>Seller:{{product.seller.seller_name|title}}</h6>
+        </div>
+        <div class="cost mt-3 text-dark text-center">
+          <span>RS {{product.price}}</span>
+        </div>
+        <a class="p-3 sheo nav-link text-center text-white mt-3 cursor" 
+          href="{% url 'customer:detailspage' product.id %}">
+            BuyNow
+          </a> 
+        
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+{% endblock %}
